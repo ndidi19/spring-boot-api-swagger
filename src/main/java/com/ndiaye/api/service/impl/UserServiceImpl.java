@@ -1,6 +1,7 @@
 package com.ndiaye.api.service.impl;
 
 import com.ndiaye.api.entity.User;
+import com.ndiaye.api.exception.UserNotFoundException;
 import com.ndiaye.api.repository.IUserRepository;
 import com.ndiaye.api.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,10 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User getUserById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id)
+                .orElseThrow(
+                        () -> new UserNotFoundException("User not found for id : " + id)
+                );
     }
 
     @Override
