@@ -27,6 +27,15 @@ public class User {
     public User() {
     }
 
+    public User(String firstname, String lastname, String address, String zipCode, String country, Long age) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.country = country;
+        this.age = age;
+    }
+
     public User(Long id, String firstname, String lastname, String address, String zipCode, String country, Long age) {
         this.id = id;
         this.firstname = firstname;
