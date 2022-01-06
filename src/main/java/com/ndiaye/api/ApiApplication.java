@@ -22,13 +22,13 @@ public class ApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		User u = new User(
-				"John", "Doe", "36 boulevard des rosiers", "75010", "France",
+				"John", "Doe", "john.doe@gmail.com", "36 boulevard des rosiers", "75010", "France",
 				27L);
 		User u1 = new User(
-				"Jack", "Ma", "43 boulevard des tulipiers", "93110", "France",
+				"Jack", "Ma", "jack.ma@gmail.com", "43 boulevard des tulipiers", "93110", "France",
 				33L);
 		User u2 = new User(
-				"Jennifer", "Aniston", "99 Melrose Boulevard", "65ML", "US",
+				"Jennifer", "Aniston", "jennifer.aniston@gmail.com", "99 Melrose Boulevard", "65ML", "US",
 				40L);
 
 		userRepository.save(u);

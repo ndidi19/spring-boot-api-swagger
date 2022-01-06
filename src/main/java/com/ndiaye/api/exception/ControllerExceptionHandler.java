@@ -23,6 +23,18 @@ public class ControllerExceptionHandler {
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), new Date());
     }
 
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    public ErrorResponse userAlreadyExistsException(UserAlreadyExistsException ex) {
+        return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), new Date());
+    }
+
+    @ExceptionHandler(ForbiddenEmailException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    public ErrorResponse userAlreadyExistsException(ForbiddenEmailException ex) {
+        return new ErrorResponse(HttpStatus.FORBIDDEN.value(), ex.getMessage(), new Date());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorResponse methodArgumentNotValidException(MethodArgumentNotValidException ex) {
