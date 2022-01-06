@@ -16,6 +16,8 @@ public class User {
 
     private String lastname;
 
+    private String email;
+
     private String address;
 
     private String zipCode;
@@ -27,19 +29,21 @@ public class User {
     public User() {
     }
 
-    public User(String firstname, String lastname, String address, String zipCode, String country, Long age) {
+    public User(String firstname, String lastname, String email, String address, String zipCode, String country, Long age) {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.email = email;
         this.address = address;
         this.zipCode = zipCode;
         this.country = country;
         this.age = age;
     }
 
-    public User(Long id, String firstname, String lastname, String address, String zipCode, String country, Long age) {
+    public User(Long id, String firstname, String lastname, String email, String address, String zipCode, String country, Long age) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.email = email;
         this.address = address;
         this.zipCode = zipCode;
         this.country = country;
@@ -68,6 +72,14 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -108,29 +120,11 @@ public class User {
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", zipCode='" + zipCode + '\'' +
                 ", country='" + country + '\'' +
                 ", age=" + age +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id) &&
-                firstname.equals(user.firstname) &&
-                lastname.equals(user.lastname) &&
-                address.equals(user.address) &&
-                zipCode.equals(user.zipCode) &&
-                country.equals(user.country) &&
-                age.equals(user.age);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, lastname, address, zipCode, country, age);
     }
 }

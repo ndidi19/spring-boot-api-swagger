@@ -29,6 +29,7 @@ public class UserServiceImpl implements IUserService {
         User newUser = new User();
         newUser.setFirstname(user.getFirstname());
         newUser.setLastname(user.getLastname());
+        newUser.setEmail(user.getEmail());
         newUser.setAddress(user.getAddress());
         newUser.setZipCode(user.getZipCode());
         newUser.setCountry(user.getCountry());
