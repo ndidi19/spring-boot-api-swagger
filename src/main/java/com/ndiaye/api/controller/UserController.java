@@ -1,9 +1,11 @@
 package com.ndiaye.api.controller;
 
+import com.ndiaye.api.dto.CreateUserDto;
 import com.ndiaye.api.entity.User;
 import com.ndiaye.api.service.IUserService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    User postUser(@RequestBody User user) {
+    User postUser(@Valid @RequestBody CreateUserDto user) {
         return userService.createUser(user);
     }
 

@@ -1,5 +1,6 @@
 package com.ndiaye.api.service.impl;
 
+import com.ndiaye.api.dto.CreateUserDto;
 import com.ndiaye.api.entity.User;
 import com.ndiaye.api.exception.UserNotFoundException;
 import com.ndiaye.api.repository.IUserRepository;
@@ -24,8 +25,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public User createUser(CreateUserDto user) {
+        User newUser = new User();
+        newUser.setFirstname(user.getFirstname());
+        newUser.setLastname(user.getLastname());
+        newUser.setAddress(user.getAddress());
+        newUser.setZipCode(user.getZipCode());
+        newUser.setCountry(user.getCountry());
+        newUser.setAge(user.getAge());
+        return userRepository.save(newUser);
     }
 
     @Override

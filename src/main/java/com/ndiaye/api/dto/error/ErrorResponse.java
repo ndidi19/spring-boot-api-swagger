@@ -1,4 +1,4 @@
-package com.ndiaye.api.dto;
+package com.ndiaye.api.dto.error;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ public class ErrorResponse {
 
     private int code;
     private String message;
-    private Date date;
+    private Date timestamp;
 
     public int getCode() {
         return code;
@@ -24,12 +24,12 @@ public class ErrorResponse {
         this.message = message;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getTimestamp() {
+        return timestamp;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public ErrorResponse() {
@@ -40,10 +40,10 @@ public class ErrorResponse {
         this.message = message;
     }
 
-    public ErrorResponse(int code, String message, Date date) {
+    public ErrorResponse(int code, String message, Date timestamp) {
         this.code = code;
         this.message = message;
-        this.date = date;
+        this.timestamp = timestamp;
     }
 
     @Override
@@ -51,6 +51,7 @@ public class ErrorResponse {
         return "ErrorResponse{" +
                 "code=" + code +
                 ", message='" + message + '\'' +
+                ", timestamp=" + timestamp +
                 '}';
     }
 }
