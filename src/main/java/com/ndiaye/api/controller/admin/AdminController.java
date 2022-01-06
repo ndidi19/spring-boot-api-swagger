@@ -1,21 +1,21 @@
-package com.ndiaye.api.controller;
+package com.ndiaye.api.controller.admin;
 
 import com.ndiaye.api.dto.CreateUserDto;
 import com.ndiaye.api.dto.UpdateUserDto;
 import com.ndiaye.api.entity.User;
 import com.ndiaye.api.service.IUserService;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class UserController {
+@RequestMapping("/admin")
+public class AdminController {
 
     private IUserService userService;
 
-    public UserController(IUserService userService) {
+    public AdminController(IUserService userService) {
         this.userService = userService;
     }
 
@@ -39,7 +39,6 @@ public class UserController {
         return userService.updateUser(id, user);
     }
 
-    @ApiIgnore
     @DeleteMapping("/users/{id}")
     void deleteUser(@PathVariable Long id) {
         userService.deleteUserById(id);
