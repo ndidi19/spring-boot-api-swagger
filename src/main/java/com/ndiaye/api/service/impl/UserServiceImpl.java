@@ -8,6 +8,11 @@ import com.ndiaye.api.exception.UserAlreadyExistsException;
 import com.ndiaye.api.exception.UserNotFoundException;
 import com.ndiaye.api.repository.IUserRepository;
 import com.ndiaye.api.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +20,8 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements IUserService {
+
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final static String USER_NOT_FOUND_MSG = "User not found";
     private final static String USER_ALREADY_EXISTS_MSG = "User already exists for given email";
@@ -27,6 +34,7 @@ public class UserServiceImpl implements IUserService {
         this.userRepository = userRepository;
     }
 
+    @Cacheable("users")
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -52,14 +60,17 @@ public class UserServiceImpl implements IUserService {
         return userRepository.save(newUser);
     }
 
+    @Cacheable(value = "users", key = "#id")
     @Override
     public User getUserById(Long id) {
+        log.info("Get user " + id);
         return userRepository.findById(id)
                 .orElseThrow(
                         () -> new UserNotFoundException(USER_NOT_FOUND_MSG + " : " + id)
                 );
     }
 
+    @CachePut(value = "users", key = "#id")
     @Override
     public User updateUser(Long id, UpdateUserDto newUser) {
         User retrievedUser = userRepository.findById(id)
@@ -72,6 +83,7 @@ public class UserServiceImpl implements IUserService {
         return userRepository.save(retrievedUser);
     }
 
+    @CacheEvict(value = "users", key = "#id")
     @Override
     public void deleteUserById(Long id) {
         User retrievedUser = userRepository.findById(id)
@@ -79,5 +91,10 @@ public class UserServiceImpl implements IUserService {
                         () -> new UserNotFoundException(USER_NOT_FOUND_MSG + " : " + id)
                 );
         userRepository.delete(retrievedUser);
+    }
+
+    @CacheEvict(value="users", allEntries=true)
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
     }
 }
